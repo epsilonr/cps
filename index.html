@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CPS Test</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/33b5112633.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <p class="p-head">Let's Start</p>
+    <div class="container-clicks">
+        <button class="button-click"></button>
+        <p class="p-clicks">Click Me!</p>
+    </div>
+    <p class="p-timer">5.00</p>
+    <div class="pop-screen">
+        <div class="pop-container">
+            <button class="button-close"><i class="fa-solid fa-xmark"></i></button>
+            <p style="line-height: 0; font-weight: 500; font-size: 32px;">Your speed is</p>
+            <p class="p-result">00 CPS</p>
+            <p class="p-record">Record: 00 CPS</p>
+        </div>
+    </div>
+    <script>
+        let i = 0;
+        let start = 500;
+        let second  = Math.f
+        let lastResult = 0;
+        let record = 0;
+
+        const popup = document.querySelector(".pop-screen");
+        popup.style.display = "none";
+        const btnClose = document.querySelector(".button-close");
+
+        btnClose.addEventListener("click", e => {
+            popup.style.display = "none";
+        });
+
+        const btnStart = document.querySelector(".button-click");
+        const count = document.querySelector(".p-clicks");
+        const timer = document.querySelector(".p-timer");
+        var ttimer;
+
+        btnStart.addEventListener("click", e => 
+        {
+            if(count.textContent == "Click Me!")
+            {
+                timer.textContent = "4.99";
+                ttimer = setInterval(timerStart, 10);
+            }
+            i++;
+            count.textContent = i;
+        });
+
+        function timerStart() {
+            start--;
+            timer.textContent = `${Math.floor(start / 100)}.${(start % 100 < 10)? `0${start % 100}`:start % 100}`;
+            if(start == 0)
+            {
+                clearInterval(ttimer);
+                lastResult = i/5;
+                timer.textContent = "5.00";
+                count.textContent = "Click Me!";
+                i = 0
+                start = 500;
+                console.log("Result: " + lastResult + " CPS");
+                if(lastResult > record)
+                {
+                    record = lastResult;
+                }
+                document.querySelector(".p-record").innerHTML = `Record: ${record} CPS`;
+                document.querySelector(".p-result").innerHTML = `${lastResult} CPS`;
+                popup.style.display = "flex";
+            }
+        }
+    </script>
+</body>
+</html>
